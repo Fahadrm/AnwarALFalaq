@@ -21,7 +21,7 @@
                   <field name="loss_product" invisible="1"/>
                 </xpath>
                 <xpath expr="//tree" position="attributes">
-                    <attribute name="decoration-danger">loss_product == True</attribute>
+                    <attribute name="decoration-warning">loss_product == True</attribute>
                 </xpath>
             </field>
         </record>
@@ -48,7 +48,7 @@
                   <field name="loss_product" invisible="1"/>
                 </xpath>
                 <xpath expr="//tree" position="attributes">
-                    <attribute name="decoration-primary">loss_product == True</attribute>
+                    <attribute name="decoration-warning">loss_product == True</attribute>
                 </xpath>
             </field>
         </record>
