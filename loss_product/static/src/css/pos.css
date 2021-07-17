@@ -1,0 +1,14 @@
+.loss_product {
+    background: green;
+    position: absolute;
+    top: 69px;
+    right: 33px;
+    vertical-align: top;
+    color: white;
+    line-height: 18px;
+    padding: 2px 5px;
+    border-radius: 2px;
+    opacity: 0.5;
+}
+
+
