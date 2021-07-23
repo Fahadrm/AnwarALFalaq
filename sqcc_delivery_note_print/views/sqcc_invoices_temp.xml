@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <data>
+        <template id="sqcc_delivery_note_template_document">
+
+                 <style type="text/css">
+                    .Row {
+                    display: table;
+                    width: 100%; /*Optional*/
+                    }
+
+                    @font-face {
+                    font-family: 'calibri';
+                    src: url('/sqcc_delivery_note_print/static/src/fonts/calibri/Calibri.ttf') format('opentype');
+                    }
+
+                    @font-face {
+                    font-family: 'Times New Roman';
+                    src: local('Times New Roman'), local('Times New Roman'),
+                    url(/sqcc_delivery_note_print/static/src/fonts/times_new_roman.ttf') format('ttf');
+                    }
+
+                    @font-face {
+                    font-family: 'Arial';
+                    src: local('Arial'), local('Arial'),
+                    url(/sqcc_delivery_note_print/static/src/fonts/arial.ttf') format('truetype');
+                    }
+                    @font-face {
+                    font-family: 'Verdana';
+                    src: local('Verdana'), local('Verdana'),
+                    url(/sqcc_delivery_note_print/static/src/fonts/verdana.ttf') format('ttf');
+                    }
+
+                    .arabic-font {
+                    font-family: arial;
+                    }
+
+                    .en-font {
+                    font-family: Verdana;
+                    }
+                    .arabic_calibri{
+                    font-family: calibri;
+                    }
+                    th, td {
+                    padding: 3px;
+                    }
+                    tr{
+                        page-break-inside: avoid;
+                        }
+                </style>
+<!--            <t t-call="sqcc_delivery_note_print.sqcc_print_external_layout">-->
+                        <t t-if="not o" t-set="o" t-value="doc"/>
+            <t t-if="not company">
+                <!-- Multicompany -->
+                <t t-if="company_id">
+                    <t t-set="company" t-value="company_id"/>
+                </t>
+                <t t-elif="o and 'company_id' in o">
+                    <t t-set="company" t-value="o.company_id.sudo()"/>
+                </t>
+                <t t-else="else">
+                    <t t-set="company" t-value="res_company"/>
+                </t>
+            </t>
+
+                                <div class="header">
+                                     <style type="text/css">
+                    .Row {
+                    display: table;
+                    width: 100%; /*Optional*/
+                    }
+
+                    @font-face {
+                    font-family: 'calibri';
+                    src: url('/sqcc_delivery_note_print/static/src/fonts/calibri/Calibri.ttf') format('opentype');
+                    }
+
+                    @font-face {
+                    font-family: 'Times New Roman';
+                    src: local('Times New Roman'), local('Times New Roman'),
+                    url(/sqcc_delivery_note_print/static/src/fonts/times_new_roman.ttf') format('ttf');
+                    }
+
+                    @font-face {
+                    font-family: 'Arial';
+                    src: local('Arial'), local('Arial'),
+                    url(/sqcc_delivery_note_print/static/src/fonts/arial.ttf') format('truetype');
+                    }
+                    @font-face {
+                    font-family: 'Verdana';
+                    src: local('Verdana'), local('Verdana'),
+                    url(/sqcc_delivery_note_print/static/src/fonts/verdana.ttf') format('ttf');
+                    }
+
+                    .arabic-font {
+                    font-family: arial;
+                    }
+
+                    .en-font {
+                    font-family: Verdana;
+                    }
+                    .arabic_calibri{
+                    font-family: calibri;
+                    }
+                    th, td {
+                    padding: 3px;
+                    }
+                    tr{
+                        page-break-inside: avoid;
+                        }
+                </style>
+                <div class="row">
+                    <div class="col-7">
+                        <!--                        <img style="margin-left: auto;margin-right: auto;max-height: 80px;"-->
+
+                          <img style="margin-left: auto;margin-right: auto;width:550px;"
+                             t-att-src="'/sqcc_delivery_note_print/static/description/src/img/logo.png'"/>
+<!--                        <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)" style="max-height: 50px;" />-->
+                    </div>
+
+<!--                     <div class="col-4 pull-right" style="font-size : 16px; font-weight:bold;">-->
+<!--                        <p class="arabic-font" style="text-align: center;">الفاتورة الضريبة</p>-->
+<!--                        <p class="en-font"-->
+<!--                            style="text-align: center; text-decoration: underline; margin-top:-9px;">15OICE-->
+<!--                        </p>-->
+<!--                        <br/>-->
+
+<!--                    </div>-->
+
+                    <div class="col-5 text-right" style="font:12px lucida-console,sans-serif !important;">
+                        <span class="en-font" t-field="o.company_id.partner_id" />
+                        <br/>
+                        <span class="en-font" t-field="o.company_id.partner_id.street" />
+                        <br/>
+                        <span class="en-font" t-field="o.company_id.partner_id.street2" />
+                        <br/>
+                        <span class="en-font" t-field="o.company_id.partner_id.city" />
+                        <br/>
+                        <span class="en-font" t-field="o.company_id.partner_id.country_id" />
+                        <br/>
+<!--                        VAT#<span t-field="o.operating_unit_id.warehouse_id.partner_id.vat" />-->
+<!--                        <br/>-->
+                        <p style="font-size : 14px;font-weight:bold;">
+                            <span class="en-font">VAT #</span>
+                            <span class="en-font"> 310224805600003</span>
+<!--                            <span class="en-font" t-field="o.operating_unit_id.warehouse_id.partner_id.vat" align="right"/>-->
+                            <span class="arabic-font">ضريبة</span>
+                        </p>
+                    </div>
+                    <br/>
+                </div>
+
+
+                                    <div class="row">
+                                        <div class="col-4" ></div>
+                                         <div class="col-4" style="ont-weight:bold;">
+                        <div class="arabic-font" style="text-align: center;font-size : 22px; font-weight: 900;"><b>مذكرة تسليم</b></div>
+                        <div class="en-font"
+                             style="font-family: 'font-a-bold';float:center;text-align:center;text-decoration: underline; margin-top:-9px;font-size : 22px; font-weight: 900;text-weight:bold;"><b>DELIVERY NOTE</b>
+                        </div>
+
+                    </div>
+                                        <div class="col-4" >
+
+                                        </div>
+                                    </div>
+
+            </div>
+
+            <div class="footer">
+                <div class="col-12">
+
+<!--                          <img style="margin-left: auto;margin-right: auto;width:120px;"-->
+<!--                             t-att-src="'/sqcc_delivery_note_print/static/description/src/img/iso_certified.png'"/>-->
+                    <img style="margin-left: auto;margin-right: auto;"
+                             t-att-src="'/sqcc_delivery_note_print/static/description/src/img/footer_adding.png'"/>
+                    </div>
+                <div t-if="report_type == 'pdf'"  style="text-align:center;vertical-align:middle;font-size:14px;">
+
+                    Page <span class="page"/> of <span class="topage"/>
+                </div>
+            </div>
+                <t t-call="web.external_layout">
+                <t t-set="o" t-value="o.with_context(lang=lang)"/>
+        <div class="page">
+             <style type="text/css">
+                    .Row {
+                    display: table;
+                    width: 100%; /*Optional*/
+                    }
+
+                    @font-face {
+                    font-family: 'calibri';
+                    src: url('/sqcc_delivery_note_print/static/src/fonts/calibri/Calibri.ttf') format('opentype');
+                    }
+
+                    @font-face {
+                    font-family: 'Times New Roman';
+                    src: local('Times New Roman'), local('Times New Roman'),
+                    url(/sqcc_delivery_note_print/static/src/fonts/times_new_roman.ttf') format('ttf');
+                    }
+
+                    @font-face {
+                    font-family: 'Arial';
+                    src: local('Arial'), local('Arial'),
+                    url(/sqcc_delivery_note_print/static/src/fonts/arial.ttf') format('truetype');
+                    }
+                    @font-face {
+                    font-family: 'Verdana';
+                    src: local('Verdana'), local('Verdana'),
+                    url(/sqcc_delivery_note_print/static/src/fonts/verdana.ttf') format('ttf');
+                    }
+
+                    .arabic-font {
+                    font-family: arial;
+                    }
+
+                    .en-font {
+                    font-family: Verdana;
+                    }
+                    .arabic_calibri{
+                    font-family: calibri;
+                    }
+                    th, td {
+                    padding: 3px;
+                    }
+                    tr{
+                        page-break-inside: avoid;
+                        }
+                </style>
+                    <div class="oe_structure"/>
+
+
+
+                        <div>
+                            <table class="table table-sm" style=" table-layout:fixed;font-size: 11px;" >
+                        <thead>
+                            <tr>
+                                <th class="en-font" width="27px" style="text-align:center;font-size: 13px;background-color:#e20000 !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important;text-weight:bold; "><b>Customer</b></th>
+                                <th class="arabic-font" width="27px" style="text-align:center;background-color:#e20000 !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important;text-weight:bold;font-size: 13px; "><b>العميل</b></th>
+                                 <th width="16px" style="text-align:center;background-color:#e20000 !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important;text-weight:bold; ">
+
+                                      <span class="en-font" style="font-size: 13px; text-align:center;text-weight:bold;"><b>DN No.</b></span>
+
+                                    </th>
+
+                                <th width="14px" style="text-align:center;font-size: 13px;background-color:#e20000 !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important;text-weight:bold; ">
+
+                                            <span class="en-font" style="font-size: 13px;text-align: center;text-weight:bold;"><b> Date</b></span>
+
+
+                                </th>
+
+                                 <th width="14px" style="text-align:center;font-size: 13px;background-color:#e20000 !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important;text-weight:bold; ">
+
+                                    <span class="en-font" style="font-size: 13px; text-align: center;text-weight:bold;"><b> P.O.No</b></span>
+
+
+
+                                </th>
+
+                            </tr>
+                       </thead>
+                       <tbody>
+                            <tr>
+                                <td rowspan="3" class="en-font" style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                    <b style="font-size: 12px;text-weight:bold;">
+                                        <t t-if="o.partner_id.parent_id.name">
+                                            <b><t t-esc="o.partner_id.parent_id.name"/></b>
+                                        </t>
+
+                                        <t t-if="not o.partner_id.parent_id.name">
+                                            <b><t t-esc="o.partner_id.name"/></b>
+                                        </t>
+<!--                                        <div style="font-size: 12px;text-weight:bold;" t-field="o.partner_id"/>-->
+                                    </b><br/>
+                                    <t t-if="o.partner_id.street">
+                                    <t t-esc="o.partner_id.street"/><br/>
+                                    </t>
+                                    <t t-if="o.partner_id.street2">
+                                        <t t-esc="o.partner_id.street2"/><br/>
+                                    </t>
+                                    <t t-if="o.partner_id.city">
+                                        <t t-esc="o.partner_id.city"/>,
+                                    </t>
+                                    <t t-if="o.partner_id.state_id.name">
+                                        <t t-esc="o.partner_id.state_id.name"/>,<br/>
+                                    </t>
+                                    <t t-if="o.partner_id.country_id.name">
+                                        <t t-esc="o.partner_id.country_id.name"/>,
+                                    </t>
+                                    <t t-if="o.partner_id.zip">
+                                        <t t-esc="o.partner_id.zip"/>.
+                                    </t><br/>
+                                     TEL:<t t-if="o.partner_id.phone">
+                                        <t t-esc="o.partner_id.phone"/>
+                                    </t><br/>
+                                    CR:<t t-if="o.partner_id.cr_number">
+                                       <t t-esc="o.partner_id.cr_number"/>
+                                    </t>
+<!--                                    <br/>-->
+<!--                                    VAT:<t t-if="o.partner_id.vat">-->
+<!--                                      <t t-esc="o.partner_id.vat"/>-->
+<!--                                    </t>-->
+<!--                                    <div t-field="o.partner_id.vat"/>-->
+                                </td>
+                                <td rowspan="3" class="arabic-font" style="border: 1px !important; border-style: solid !important; border-color: #fff !important;text-align:right;">
+                                    <b style="font-size: 12px;text-weight:bold;">
+
+                                         <t t-if="o.partner_id.parent_id.name_arabic">
+                                                        <t t-esc="o.partner_id.parent_id.name_arabic"/>
+                                                        </t>
+
+                                                  <t t-if="not o.partner_id.parent_id.name_arabic">
+                                                        <t t-esc="o.partner_id.name_arabic"/>
+                                                        </t>
+<!--                                        <div style="font-size: 12px;text-weight:bold;" t-field="o.partner_id.name_arabic"/>-->
+
+                                    </b>
+
+                                    <br/>
+                                    <t t-if="o.partner_id.parent_id.name_arabic">
+                                        <t t-esc="o.partner_id.parent_id.street_arabic"/><br/>
+                                    </t>
+
+                                    <t t-if="not o.partner_id.parent_id.name_arabic">
+                                        <t t-esc="o.partner_id.street_arabic"/><br/>
+                                    </t>
+
+                                    <t t-if="o.partner_id.parent_id.name_arabic">
+                                        <t t-esc="o.partner_id.parent_id.street2_arabic"/><br/>
+                                    </t>
+
+                                    <t t-if="not o.partner_id.parent_id.name_arabic">
+                                        <t t-esc="o.partner_id.street2_arabic"/><br/>
+                                    </t>
+
+                                    <t t-if="o.partner_id.parent_id.name_arabic">
+                                        <t t-esc="o.partner_id.parent_id.city_arabic"/>,
+                                    </t>
+
+                                    <t t-if="not o.partner_id.parent_id.name_arabic">
+                                        <t t-esc="o.partner_id.city_arabic"/>,
+                                    </t>
+
+                                    <t t-if="o.partner_id.parent_id.name_arabic">
+                                        <t t-esc="o.partner_id.parent_id.country_arabic.name"/>,
+                                    </t>
+
+                                    <t t-if="not o.partner_id.parent_id.name_arabic">
+                                        <t t-esc="o.partner_id.country_arabic.name"/>,
+                                    </t>
+
+
+                                </td>
+
+                                 <td class="en-font" style="text-align:center;border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                   <t t-esc="o.name"/>
+
+                                </td>
+                                <td class="en-font" style="text-align:center;border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+
+                                   <t t-if="o.scheduled_date">
+                                         <t t-esc="datetime.datetime.strptime(str(o.scheduled_date), '%Y-%m-%d %H:%M:%S').strftime('%d-%m-%Y')"/>
+                                     </t>
+
+                                </td>
+
+                                <td class="en-font" style="text-align:center;border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+
+                                  <t t-esc="o.cpo_number"/>
+
+                                    </td>
+
+                            </tr>
+
+                           <tr>
+
+                               <td class="en-font" style="text-align:center;font-size: 13px;background-color:#e20000 !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important;text-weight:bold;">
+                                   <b>Customer VAT No.</b>
+                               </td>
+                                <td class="en-font" style="text-align:center;font-size: 13px;background-color:#e20000 !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important;text-weight:bold;">
+                                   <b> Payment Terms</b>
+                               </td>
+                                <td class="en-font" style="text-align:center;font-size: 13px;background-color:#e20000 !important;border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important;text-weight:bold;">
+                                   <b>Delivery Location</b>
+                               </td>
+
+                           </tr>
+                           <tr>
+
+                               <td class="en-font" style="text-align:center;border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+
+                                     <span t-field="o.partner_id.vat"/>
+                               </td>
+
+                               <td class="en-font" style="text-align:center;border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                   <t t-if="o.payment_terms">
+                                       <t t-esc="o.payment_terms.name"/>
+                                   </t>
+                               </td>
+
+                               <td class="en-font" style="text-align:center;border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                   <t t-if="o.delivery_location">
+                                       <t t-esc="o.delivery_location"/>
+                                   </t>
+
+                               </td>
+
+
+                           </tr>
+                        </tbody>
+                    </table>
+
+
+
+                    <table class="table table-sm" style="table-layout:fixed;font-size: 11px;" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th width="8px" style="text-weight:bold;background-color:#e20000 !important;border: 1px !important; border-style: solid !important; border-color: #fff !important;color:#fff !important;text-align:center;">
+                                    <span class="arabic-font">رقم متسلسل</span><br/>
+                                    <span class="en-font">Sl No.</span>
+                                </th>
+                                <th width="10px" style="text-weight:bold;background-color:#e20000 !important;border: 1px !important; border-style: solid !important; border-color: #fff !important;color:#fff !important;text-align:center"> <span class="arabic-font">رقم الجزء</span><br/><span class="en-font">Part No.</span></th>
+                                <th width="52px" class="en-font" style="text-weight:bold;background-color:#e20000 !important;border: 1px !important; border-style: solid !important; border-color: #fff !important;color:#fff !important;text-align:center;vertical-align:middle;">
+                                    <span class="arabic-font"> وصف السلعة</span><br/><span class="en-font">Material Description</span>
+                                </th>
+                                <th width="8px" style="text-weight:bold;background-color:#e20000 !important;border: 1px !important; border-style: solid !important; border-color: #fff !important;color:#fff !important;text-align:center"> <span class="arabic-font">الوحدة</span><br/><span class="en-font">Unit</span></th>
+                                <th width="10px" style="text-weight:bold;background-color:#e20000 !important;border: 1px !important; border-style: solid !important; border-color: #fff !important;color:#fff !important;text-align:center"> <span class="arabic-font">الكمية</span><br/><span class="en-font">Quantity </span></th>
+                                <th width="12px" style="text-weight:bold;background-color:#e20000 !important;border: 1px !important; border-style: solid !important; border-color: #fff !important;color:#fff !important;text-align:center"><span class="arabic-font">ملاحظات</span><br/><span class="en-font">Remarks</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="o.move_ids_without_package" t-as="l">
+                                <td style="text-align:center;" class="en-font"><t t-esc="l_index+1"/></td>
+
+                                <td class="en-font" style="text-align:center;"><t t-esc="l.product_id.barcode"/></td>
+                                <td style="line-height: 1;">
+                                    <div class="en-font" style="text-align:left;">
+                                                    <t t-esc="l.product_id.name"/>
+                                    </div>
+                                    <div class="arabic-font" style="text-align:right;">
+
+                                                <t t-esc="l.product_id.name_arabic"/>
+
+                                            </div>
+
+                                </td>
+
+                                <td class="text-center" style="line-height: 1;">
+                                     <div class="en-font" style="text-align:center;">
+                                         <t t-esc="l.product_uom.name"/>
+                                    </div>
+                                    <div class="arabic-font" style="text-align:center;">
+                                        <t t-esc="l.product_uom.name_arabic"/>
+                                    </div>
+
+                                </td>
+
+                                <td class="text-center en-font">
+                                    <t t-esc="'{0:.2f}'.format(float(l.quantity_done))"/>
+
+                                </td>
+
+
+                                  <td class="text-left en-font">
+                                   <t t-esc="l.product_remark"/>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+ </div>
+                    <div>
+
+
+                        <div class="row">
+                        <div class="col-12" style="width:100%;Text-align:right;; color: red;">
+                            <span class="arabic-font" style="font-weight:bold; color: red;Text-align:right;">
+                                  <span style="font-size: 13px;Text-align:right;">
+                                      تم التحقق من جميع البنود والكميات المذكورة أعلاه واستلامها في حالة جيدة
+                                  </span>
+                                </span>
+                        </div>
+                     </div>
+
+
+                    <div class="row">
+                        <div class="col-12">
+                        <div style="width:55%;Text-align:center;float:left;">
+                        </div>
+                        <div style="Width:35%;float:right; color: red;">
+                        <table>
+                            <tr class="en-font" style="font-weight:bold; color: red;Text-align:left;">
+                                   <td> <span  style="font-size: 12px; text-align: left;">All items and quantities mentioned above have</span><br/>
+                                   <span  style="font-size: 12px; text-align: left;">been verified and received in good condition</span></td>
+                            </tr>
+                        </table>
+                        </div>
+                        </div>
+                    </div>
+
+
+                    </div>
+            <div style="padding-top:10px;font-size: 11px;">
+        </div>
+
+
+<!--                   <div class="row" style="page-break-inside:avoid;">-->
+<!--                <div class="col-6" style="page-break-inside:avoid;">-->
+
+
+<!--                    <div class="en-font" style="font-size: 11px;padding:3px;background-color:#F0F0F0; border-style: solid;border-color:#A9A9A9;border:1px solid #D3D3D3;page-break-inside:avoid;">-->
+
+
+<!--                    <strong>Bank Details:</strong><br/>-->
+<!--                        <span><font>Substainable Quality Contracting Co</font> </span><br/>-->
+<!--                        <span><font>account # 07800000221400</font> </span><br/>-->
+<!--                        <span><font>IBAN : SA3210000007800000221400</font> </span><br/>-->
+
+<!--                        <span><font>Swift Code :NCBKSAJE</font> </span>-->
+<!--                        <br/>-->
+<!--                        <span><font>Doha branch,Al Khobar 31952<br/>-->
+<!--                        Kingdom of Saudi Arabia</font> </span>-->
+<!--                        <br/>-->
+<!--                        </div>-->
+
+<!--                </div>-->
+
+<!--&lt;!&ndash;                <div class="col-1">&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+
+<!--                <div class="col-6" style="height: 120px;page-break-inside:avoid;">-->
+<!--                    <div class="en-font" style="height: 120px;font-size: 11px;padding:3px;background-color:#F0F0F0;border-style: solid;border-color:#A9A9A9;border:1px solid #D3D3D3;page-break-inside:avoid;">-->
+
+<!--                    <strong>Other Terms:</strong><br/>-->
+
+<!--                    <span t-field="o.narration"/>-->
+<!--                </div>-->
+
+<!--&lt;!&ndash;                    <t f-if="o.narration">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <t t-esc="o.narration"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </t>&ndash;&gt;-->
+
+<!--                </div>-->
+
+
+
+<!--            </div>-->
+
+            <br/>
+
+            <div class="row">
+                <div class="col-4">
+                    <div class="en-font" style="text-align:left;font-size:12px;text-weight:bold;">
+                        <b>Prepared by:
+                        <br/><br/><br/><br/>
+                            ____________________</b>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="en-font" style="text-align:center;font-size:12px;text-weight:bold;">
+                        <b>Checked by:
+                        <br/><br/><br/><br/>
+                            ____________________
+                        </b>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="en-font" style="text-align:right;font-size:12px;text-weight:bold;">
+                        <b>Approved by:
+                        <br/><br/><br/><br/>
+                            ____________________</b>
+                    </div>
+                </div>
+            </div>
+                </div>
+
+            </t>
+        </template>
+
+        <template id="sqcc_delivery_note_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                     <t t-set="lang"
+                       t-value="o.partner_id.lang"/>
+                    <t t-call="sqcc_delivery_note_print.sqcc_delivery_note_template_document" t-lang="lang"/>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
+
