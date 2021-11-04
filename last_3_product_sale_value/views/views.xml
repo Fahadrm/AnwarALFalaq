@@ -1,19 +1,18 @@
 <odoo>
     <data>
 
-        <record id="view_last_3_sale_value_tree" model="ir.ui.view">
-            <field name="name">sale.order.line.tree</field>
-            <field name="model">sale.order.line</field>
+        <record id="view_last_3_purchase_value_tree" model="ir.ui.view">
+            <field name="name">purchase.order.line.tree</field>
+            <field name="model">purchase.order.line</field>
             <field name="arch" type="xml">
-                <tree string="Last Sale Value" create="false">
+                <tree string="Last Purchase Value" create="false">
                     <field name="order_id"/>
-                    <field name="order_partner_id"/>
-                    <field name="product_uom_qty"/>
+                    <field name="partner_id"/>
+                    <field name="product_qty"/>
                     <field name="price_unit"/>
                 </tree>
             </field>
         </record>
-
         <record id="view_sale_order_last_3_sale_value_form" model="ir.ui.view">
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
@@ -23,7 +22,7 @@
                         position="after"
                 >
                     <button
-                            string="Last sale value"
+                            string="Last 3 Purchase Price"
                             name="action_open_last_sale_product_value_view"
                             type="object"
                             icon="fa-info"

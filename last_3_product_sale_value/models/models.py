@@ -8,17 +8,19 @@ class SaleOrderLine(models.Model):
 
     def action_open_last_sale_product_value_view(self):
         if self.product_id:
-            so_line = self.env['sale.order.line'].search([('product_id', '=', self.product_id.id),
-                                                              ('id', "!=", self.id), ('state', 'in', ['sale', 'done'])], order="id desc", limit=3)
+            po_line = self.env['purchase.order.line'].search([('product_id', '=', self.product_id.id),
+                                                              ('id', "!=", self.id),
+                                                              ('state', 'in', ['purchase', 'done'])], order="id desc",
+                                                             limit=3)
             domain = [
-                ("id", "in", so_line.ids)
+                ("id", "in", po_line.ids)
             ]
             return {
-                "name": _("Product Sale Value"),
+                "name": _("Product Purchase Value"),
                 "type": "ir.actions.act_window",
-                "res_model": "sale.order.line",
+                "res_model": "purchase.order.line",
                 "view_type": "form",
-                "view_id": self.env.ref('last_3_product_sale_value.view_last_3_sale_value_tree').id,
+                "view_id": self.env.ref('last_3_product_sale_value.view_last_3_purchase_value_tree').id,
                 "view_mode": "tree",
                 "target": "new",
                 "domain": domain,
