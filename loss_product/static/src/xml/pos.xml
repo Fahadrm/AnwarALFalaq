@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+   <t t-name="ProductItem" t-inherit="point_of_sale.ProductItem" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[@class='product-img']" position="inside">
+            <t t-if="props.product.loss_product">
+                <div class="loss_product" style="">Loss Product</div>
+            </t>
+        </xpath>
+
+
+    </t>
+
+</templates>

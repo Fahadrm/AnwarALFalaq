@@ -1,0 +1,58 @@
+<odoo>
+<data>
+<record id="product_template_sec_inherit_form" model="ir.ui.view">
+	<field name="name">product.template.inherit.form</field>
+	<field name="model">product.template</field>
+	<field name="inherit_id" ref="product.product_template_only_form_view" />
+	<field name="arch" type="xml">
+		<xpath expr="//header" position="inside">
+			<button name="update_uom_values" type="object" string="Update Uom Values" attrs="{'invisible': [('state', '=', 'updated')]}"/>
+			<button name="action_cancelled" state="cancelled"
+							type="object" string="Cancel" class="oe_highlight"
+							attrs="{'invisible': [('state', '=', 'cancelled')]}" />
+			<field name="state" widget="statusbar"
+							statusbar_visible="updated,cancelled"></field>
+		</xpath>
+				<div class="oe_button_box" name="button_box">
+						<button name="view_product_qty" string="View Sec.Uom"
+							type="object" class="oe_state_button" icon="fa-cubes" attrs="{'invisible': [('state', '=', 'cancelled')]}" readonly="1"/>
+						<button name="view_received_qty"
+							type="object" class="oe_state_button" icon="fa-cubes" readonly="1">
+					<span class="o_stat_value" widget="statinfo">
+					</span>
+							<span class="o_stat_text">Received Qty</span>
+
+						</button>
+					</div>
+		<xpath expr="//field[@name='company_id']" position="after">
+				<field name="sec_uom_select"/>
+				<field name="sec_uom_ids" widget="many2many_tags" context="{'show_product_uom':1}" attrs="{'invisible':[('sec_uom_select', '=', False)]}" class="mr4"/>
+		</xpath>
+		<xpath expr="//field[@name='uom_id']" position="replace">
+				<field name="uom_id"  context="{'show_product_uom':0}" />
+		</xpath>
+
+
+	</field>
+</record>
+	<record id="product_product_sec_inherit_form" model="ir.ui.view">
+	<field name="name">product.product.inherit.form</field>
+	<field name="model">product.product</field>
+	<field name="inherit_id" ref="product.product_normal_form_view" />
+	<field name="arch" type="xml">
+
+				<div class="oe_button_box" name="button_box">
+					<button name="view_received_qty"
+							type="object" class="oe_state_button" icon="fa-cubes" readonly="1">
+					<span class="o_stat_value" widget="statinfo">
+					</span>
+							<span class="o_stat_text">Received Qty</span>
+
+						</button>
+					</div>
+
+
+	</field>
+</record>
+</data>
+</odoo>

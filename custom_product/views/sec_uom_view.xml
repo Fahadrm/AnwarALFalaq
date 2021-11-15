@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_sec_uom_value_form" model="ir.ui.view">
+            <field name="name">sec.uom.value.form</field>
+            <field name="model">sec.uom.value</field>
+            <field name="arch" type="xml">
+                <form string="Secondary Uom Value">
+                     <sheet>
+                        <group>
+                            <field name="product_id"/>
+                            <field name="sec_uom_view_ids"  widget="many2many_tags"/>
+                        </group>
+                     </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="view_sec_uom_value_tree" model="ir.ui.view">
+            <field name="name">sec.uom.value.tree</field>
+            <field name="model">sec.uom.value</field>
+            <field name="arch" type="xml">
+                <tree string="Secondary Uom Value">
+
+                            <field name="product_id"/>
+                            <field name="sec_uom_view_ids"/>
+
+                </tree>
+
+            </field>
+        </record>
+
+        <record id="action_sec_uom_value_form" model="ir.actions.act_window">
+            <field name="name">Secondary Uom Value</field>
+            <field name="res_model">sec.uom.value</field>
+            <field name="view_mode">form,tree</field>
+            <field name="help" type="html">
+                 <p class="o_view_nocontent_smiling_face">
+                </p>
+            </field>
+        </record>
+
+
+
+        <menuitem id="sec_uom_menu"  name="Secondary Uom" sequence="4" parent="stock.product_uom_menu" action="action_sec_uom_value_form"/>
+    </data>
+</odoo>

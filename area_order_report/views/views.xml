@@ -1,0 +1,56 @@
+<odoo>
+    <data>
+        <record id="report_area_order_report_wizard_view" model="ir.ui.view">
+            <field name="name">Area Order Report</field>
+            <field name="model">area.order.report</field>
+            <field name="arch" type="xml">
+                <form string="Area Order Report">
+                    <group col="4">
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                    </group>
+                    <group>
+                        <field name="company_id"/>
+                    </group>
+
+                      <group>
+                        <field name="area_id"/>
+                    </group>
+<!---->
+                    <footer>
+                        <button name="export_xls" type="object" default_focus="1"
+                                string="Excel Print" class="oe_highlight"/>
+                        or
+                        <button name="check_report" string="PDF Print" type="object"
+                                class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="report_action_area_order_report_wizard" model="ir.actions.act_window">
+            <field name="name">Area Order Report</field>
+            <field name="res_model">area.order.report</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="report_area_order_report_wizard_view"/>
+            <field name="target">new</field>
+        </record>
+        <menuitem id="menu_area_order_report" name="Area Order Report"
+                  parent="sale.menu_sale_report" action="report_action_area_order_report_wizard"/>
+
+
+         <report
+            id="report_menu_area_order_report"
+            model="sale.order"
+            string="Area Order Report"
+            report_type="xlsx"
+            name="area_order_report.action_area_order_report_xls"
+            file="area_order_report.action_area_order_report_xls"
+
+        />
+
+    </data>
+</odoo>
