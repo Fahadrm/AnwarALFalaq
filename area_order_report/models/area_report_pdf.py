@@ -35,7 +35,7 @@ class AreaReportPDF(models.AbstractModel):
             			   and  to_char(date_trunc('day',so.date_order),'YYYY-MM-DD')::date between %s and %s
                            AND so.area_id =%s and so.company_id = %s 
 
-        				   group by sl.product_id,so.date_order,pt.id
+        				   group by sl.product_id,to_char(date_trunc('day',so.date_order),'DD-MM-YYYY'),pt.id
 
                                        '''
 
